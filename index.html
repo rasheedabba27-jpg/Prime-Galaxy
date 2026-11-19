@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prime Galaxy — 3D Mersenne Stairway</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #04060f; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      color: #dfe9ff;
+    }
+    #scene { position: fixed; inset: 0; display: block; }
+    .overlay { position: fixed; pointer-events: none; z-index: 10; }
+    #header {
+      top: 24px; left: 28px;
+      text-shadow: 0 2px 18px rgba(90,140,255,0.8);
+    }
+    #header h1 {
+      font-size: 30px; font-weight: 300; letter-spacing: 8px;
+      color: #eaf2ff; text-transform: uppercase;
+    }
+    #header p {
+      margin-top: 6px; font-size: 13px; letter-spacing: 1.5px;
+      color: #9db8e8;
+    }
+    #stats {
+      bottom: 24px; left: 28px; font-size: 12.5px; letter-spacing: 1px;
+      color: #8fa8d8; line-height: 1.8;
+    }
+    #stats b { color: #cfe3ff; font-weight: 600; }
+    #hint {
+      bottom: 24px; right: 28px; font-size: 12px; letter-spacing: 1.5px;
+      color: #7f95c4; text-transform: uppercase;
+    }
+    #info-box {
+      top: 78px; right: 28px; max-width: 340px;
+      background: rgba(10, 16, 34, 0.82);
+      border: 1px solid rgba(125, 212, 255, 0.35);
+      border-radius: 12px;
+      padding: 16px 20px;
+      backdrop-filter: blur(8px);
+      opacity: 0; transform: translateY(-8px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+    }
+    #info-box.visible { opacity: 1; transform: translateY(0); }
+    #tour-btn {
+      pointer-events: auto; cursor: pointer;
+      top: 24px; right: 28px;
+      background: rgba(10, 16, 34, 0.82);
+      border: 1px solid rgba(125, 212, 255, 0.45);
+      color: #cfe3ff;
+      font-size: 13px; letter-spacing: 1px;
+      padding: 10px 18px; border-radius: 999px;
+      backdrop-filter: blur(8px);
+      transition: all 0.25s ease;
+    }
+    #tour-btn:hover { border-color: #ffcf6b; color: #ffcf6b; }
+    #tour-btn.active { border-color: #ffcf6b; color: #ffcf6b; }
+    #info-title {
+      font-size: 15px; font-weight: 600; color: #ffe9b0;
+      letter-spacing: 0.5px; margin-bottom: 6px;
+    }
+    #info-body { font-size: 13px; color: #c9d9f7; line-height: 1.55; }
+    .corner-glow {
+      position: fixed; z-index: 5; pointer-events: none;
+      width: 60vmax; height: 60vmax; border-radius: 50%;
+      background: radial-gradient(circle, rgba(60,90,200,0.10), transparent 70%);
+      bottom: -30vmax; right: -20vmax;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="scene"></canvas>
+  <div class="corner-glow"></div>
+  <div class="overlay" id="header">
+    <h1>Prime Galaxy</h1>
+    <p>60,000 numbers &middot; every prime glows</p>
+  </div>
+  <div class="overlay" id="info-box">
+    <div id="info-title"></div>
+    <div id="info-body"></div>
+  </div>
+  <button class="overlay" id="tour-btn">▶ Tour the stairway</button>
+  <div class="overlay" id="stats">
+    <div><b id="prime-count">–</b> primes among the first 60,001 integers</div>
+    <div><b id="mersenne-count">–</b> Mersenne superstars rising on the stairway</div>
+    <div>Drag to orbit &middot; scroll to zoom &middot; click a star &middot; spacebar = next star &middot; Esc = exit tour</div>
+  </div>
+  <div class="overlay" id="hint">WebGL &middot; Three.js &middot; additive bloom</div>
+  <script type="importmap">
+  {"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js", "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+  </script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
