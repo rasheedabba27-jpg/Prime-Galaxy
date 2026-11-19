@@ -128,7 +128,7 @@ function buildStairway(scene, pickables) {
     pickables.push(sprite);
     waypoints.push({ position: pos, sprite });
     info.push({ p, digits, ordinal: k + 1, isLast });
-  }
+  });
 
   const railPositions = new Float32Array((waypoints.length - 1) * 6);
   waypoints.forEach((wp, k) => {
